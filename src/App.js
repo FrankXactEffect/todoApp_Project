@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+
+
+
 import './App.css';
+import Home from './Home';
+import Login from './Login';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Tododisplay from './components/Tododisplay';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className='content'>
+          {/* <Route
+            render={({ location }) => {
+              if (location.pathname !== "/") return <NavBar />;
+            }}
+          /> */}
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/loginpage'>
+              <Login />
+            </Route>
+            <Route path='/todoapp'>
+              <Tododisplay />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 
