@@ -6,7 +6,7 @@ import { FaEnvelope } from 'react-icons/fa';
 import { BiSolidLock } from 'react-icons/bi'
 import { BsEyeSlash } from 'react-icons/bs'
 import { BsGoogle, BsFacebook, BsTwitter } from 'react-icons/bs'
-
+import axios from "axios"
 
 function RegistrationPage() {
 
@@ -20,23 +20,26 @@ function RegistrationPage() {
     async function signUp(e) {
         e.preventDefault()
         //test all state by consolling them
+        try {
 
-        //convert three state to object
-        let item = { name, email, password, confirmation }
-        // console.warn(item)
 
-        let result = await fetch("http://todo-api-bvr7.onrender.com/users/create", {
-            method: 'POST',
-            body: JSON.stringify(item),
-            headers: {
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        //resolve all promises
-        result = await result.json()
-        //check wether result is coming or not
-        console.warn("result", result)
+            //convert three state to object
+            let item = { name, email, password, confirmation }
+            console.warn(item)
+
+            const response = await axios.post("https://to-do-service-backend-tutorial.onrender.com/users/create", {
+                name: name,
+                email: email,
+                password: password,
+                confirm_password: confirmation
+            })
+            //resolve all promises
+            console.log(response);
+
+        } catch (e) {
+            //check wether result is coming or not
+            console.log(e)
+        }
 
     }
     return (
@@ -46,7 +49,7 @@ function RegistrationPage() {
                 <p className='paraOne'>Welcome!</p>
                 <p className='paraTwo'>Make your day faster and better with TODO List</p>
             </div>
-            <form>
+            <form >
                 <div className='inputContainer'>
                     <AiOutlineUser className='user-icon' />
                     {/* to update state using onChange event function */}
@@ -72,7 +75,7 @@ function RegistrationPage() {
 
                 <div className='button-container-container'>
                     {/* <Link> */}
-                    <button onClick={signUp}>
+                    <button type='sumbit' onClick={signUp}>
                         <p>Sign Up</p>
                     </button>
                     {/* </Link> */}

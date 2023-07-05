@@ -1,174 +1,31 @@
 
-        // <div className='todo-list-container'>
-        //     TodoList
 
+==========================================
 
-
-            {/* <div className='todo-list-item'>
-                <p>Go to gym</p>
-                <div className='pending-button'>pending</div>
-                <div className='edit-button-icon'>
-                    <EditIcon />
-                </div>
-                <div className='delete-button-icon'>
-                    <DeleteIcon />
-                </div>
-            </div> */}
-        // </div>
-
-
-
-
-
-        /*
-.todo-list-container .todo-list-item {
-    width: 100%;
-    height: 80px;
-    background-color: white;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.todo-list-item button {
-    width: 10%;
-    height: 35px;
-}
-
-
-.todo-list-item div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10%;
-    height: 38px;
-    cursor: pointer;
-    color: orangered;
-
-
-}
-
-.todo-list-item .pending-button {
-    background-color: rgb(154, 140, 168);
-    color: white;
-} */
-/* li {
-    display: flex;
-    justify-content: space-between;
-    background: lightgray;
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
-    padding: 15px 15px 15px 10px;
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-} */
-
-
-                <div className='alternative-link'>
-                    <p>Already have an  account ? <Link to='loginpage' className='text-with-link'>Sign in</Link></p>
-                </div>
-
-
-                <div className='social-media-handles-con'>
-                    <Link id="soci-icon" className='facebook-icon'><BsFacebook /></Link>
-                    <Link id="soci-icon" className='goole-icon'><BsGoogle /></Link>
-                    <Link id="soci-icon" className='twitter-icon'><BsTwitter /></Link>
-                </div>
-
-
-.alternative-link {
-    margin-left: 145px;
-
-}
-
-.alternative-link p {
-    font-family: Arial, Helvetica, sans-serif;
-    color: orangered;
-    font-size: 15px;
-
-}
-
-.text-with-link {
-    text-decoration: none;
-}
-
-
-.social-media-handles-con {
-    display: flex;
-    margin-top: 35px;
-    margin-right: 165px;
-}
-
-#soci-icon {
-    padding-left: 100px;
-    font-size: 25px;
-    color: rgb(28, 6, 78);
-
-}
-
-
-
-
-   {/* <button>
-                <Link to="todoapp"> LoGIN</Link>
-            </button> */}
-
-
-            <div className='inputContainer'>
-                <AiOutlineUser />
-                <input type="text" placeholder='Enter your name' />
-            </div>
-
-=====================================================
-
-<div className='welcome-note'>
-                <p className='paraOne'>Welcome!</p>
-                <p className='paraTwo'>Make your day faster and better with TODO List</p>
-            </div>
-            <form action="">
-                <div className='input-field-one'>
-                    <AiOutlineUser className='top-icons-user' />
-                    <input className='with-out-icon' type="text" placeholder='Name' />
-                </div>
-                <div className='input-field-one'>
-                    <FaEnvelope className='top-icons-env' />
-                    <input className='with-out-icon' type="email" placeholder='you@gmail.com' />
-                </div>
-                <div className='input-field-one'>
-                    <BiSolidLock className='top-icons-lock' />
-                    <input className='with-icon' type="password" placeholder='password' />
-                    <BsEyeSlash className='top-left-icons' />
-                </div>
-                <div className='input-field-one'>
-                    <BiSolidLock className='top-icons-lock' />
-                    <input className='with-icon' type="password" placeholder='confirm password' />
-                    <BsEyeSlash className='top-left-icons' />
-                </div>
-
-                <div className='sign-up-btn-container'>
-                    <Link to="loginpage">
-                        <button>
-                            <p>Sign Up</p>
-                        </button>
+                <div className='forgotten-pswd'>
+                    <Link className="pswd-link">
+                        <p>forgotten password?</p>
                     </Link>
                 </div>
 
 
-                <div className='lft-and-rgt-container'>
-                    <div className='right'></div>
-                    <p>or</p>
-                    <div className='left'></div>
-                </div>
+
+                .forgotten-pswd {
+    margin-left: 50%;
+    margin-top: 10px;
+}
+
+.pswd-link {
+    text-decoration: none;
+}
+
+.pswd-link:hover {
+    text-decoration: underline;
+}
 
 
+.login-container {
 
-
-            </form>
-================================================================
-
-
-.registrationContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -177,15 +34,17 @@
     /* background-color: aqua; */
     width: 40%;
     height: 100vh;
+
 }
 
-.welcome-note {
+.welcome-back-note {
     margin-bottom: 15px;
     margin-right: 45px;
     color: rgb(28, 6, 78);
 }
 
-.welcome-note .paraOne {
+
+.welcome-back-note .paraOne {
     font-size: 55px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
@@ -193,7 +52,7 @@
 
 }
 
-.welcome-note .paraTwo {
+.welcome-back-note .paraTwo {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
@@ -203,7 +62,7 @@
 .input-field-one {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 87%;
     height: 50px;
     background-color: white;
     box-shadow: 0px 1px 2px 1px rgb(108, 106, 106);
@@ -220,13 +79,13 @@
     cursor: pointer;
 }
 
+
 .input-field-one input {
-    width: 100%;
     font-size: 15px;
     padding-left: 5px;
     border: none;
     outline: none;
-    background: red;
+    background: none;
     color: rgb(40, 6, 113);
 }
 
@@ -254,11 +113,7 @@
     color: orangered;
 }
 
-.top-icons-user {
-    font-size: 23px;
-    margin-right: 10px;
-    color: orangered;
-}
+
 
 .top-icons-lock {
     font-size: 25px;
@@ -274,6 +129,7 @@
     color: orangered;
     /* margin-left: 35px; */
 }
+
 
 
 .sign-up-btn-container {
@@ -329,4 +185,34 @@
 .lft-and-rgt-container p {
     font-weight: 600;
     color: rgb(40, 6, 113);
+}
+
+.alternative-link {
+    margin-right: 55px;
+    margin-top: 4px;
+}
+
+.alternative-link p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: orangered;
+    font-size: 15px;
+
+}
+
+.text-with-link {
+    text-decoration: none;
+}
+
+
+.social-media-handles-con {
+    display: flex;
+    margin-top: 35px;
+    margin-right: 165px;
+}
+
+#soci-icon {
+    padding-left: 100px;
+    font-size: 25px;
+    color: rgb(28, 6, 78);
+
 }
