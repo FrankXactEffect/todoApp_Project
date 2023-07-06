@@ -26,7 +26,7 @@ function RegistrationPage() {
             //convert three state to object
             let item = { name, email, password, confirmation }
             console.warn(item)
-
+            //
             const response = await axios.post("https://to-do-service-backend-tutorial.onrender.com/users/create", {
                 name: name,
                 email: email,

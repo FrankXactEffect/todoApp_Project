@@ -7,7 +7,7 @@
 
 .TodobarContainer .todo-title {
     display: flex;
-    margin-top: 10px;
+    margin-top: 18px;
     color: white;
 }
 
@@ -19,7 +19,7 @@
 } */
 
 .todo-title p {
-    font-size: 40px;
+    font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
 }
