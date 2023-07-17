@@ -5,8 +5,11 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { FaEnvelope } from 'react-icons/fa';
 import { BiSolidLock } from 'react-icons/bi'
 import { BsEyeSlash } from 'react-icons/bs'
+
 import { BsGoogle, BsFacebook, BsTwitter } from 'react-icons/bs'
 import axios from "axios"
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function RegistrationPage() {
 
@@ -19,26 +22,31 @@ function RegistrationPage() {
 
     async function signUp(e) {
         e.preventDefault()
-        //test all state by consolling them
+        //test all state by consoling them
         try {
 
 
             //convert three state to object
             let item = { name, email, password, confirmation }
             console.warn(item)
-            //
-            const response = await axios.post("https://to-do-service-backend-tutorial.onrender.com/users/create", {
+            //https://to-do-service-backend-tutorial.onrender.com/users/create
+            const response = await axios.post("https://todo-api-bvr7.onrender.com/users/create", {
                 name: name,
                 email: email,
                 password: password,
-                confirm_password: confirmation
+                repeat_password: confirmation
+
+
             })
             //resolve all promises
-            console.log(response);
+            console.log(response)
+            toast.success('successfully created, you are welcome!');
 
         } catch (e) {
             //check wether result is coming or not
             console.log(e)
+            toast.error('failed, check your details')
+
         }
 
     }
@@ -74,13 +82,18 @@ function RegistrationPage() {
                 </div>
 
                 <div className='button-container-container'>
-                    {/* <Link> */}
+                    {/* <Link to='loginpage'> */}
                     <button type='sumbit' onClick={signUp}>
                         <p>Sign Up</p>
                     </button>
                     {/* </Link> */}
                 </div>
-
+                <Toaster toastOptions={{
+                    style: {
+                        fontSize: '20px',
+                        height: '100px'
+                    }
+                }} />
                 <div className='light-lines-con'>
                     <div className='side-left'></div>
                     <p>or</p>

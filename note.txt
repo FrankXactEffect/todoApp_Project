@@ -1,218 +1,225 @@
+============================================================
+//FieldButtonbar.jsx
+//default value of the todo
+    const [todo, setTodo] = useState({ title: "", done: false });
+    const [todoArr, setTodoArr] = useState([]);
+
+    //if it has object ? then the object is parsed and gotten
+    let todos = localStorage.hasOwnProperty("todos")
+        ? JSON.parse(localStorage.getItem("todos"))
+        : []
+
+    const onChange = (event) => {
+        //destructuring the value from the object
+        let { value } = event.target
+        let obj = {}
+        obj["title"] = value
+        obj["done"] = false
+        setTodo(obj)
+    }
+
+    // creating the function that will trigger the event on the button
+    const createTodo = (event) => {
+        //get the property
+        const { name } = event.target
+        if (event.key === "Enter" || name === "addTodo") {
+            if (todo.title !== "") {
+                //push or add from the top
+                todos.unshift(todo)
+                localStorage.setItem('todos', JSON.stringify(todos))
+                //clear input field
+                setTodo({ title: "", done: false })
+            } else {
+                alert("Oop!,Please write todo first❌")
+            }
+        }
+    }
+
+    const completeTodo = (i) => {
+        if (todos[i]["done"] !== true) {
+            todos[i]["done"] = true
+            localStorage.setItem("todos", JSON.stringify(todos))
+            setTodoArr(todos)
+            alert("Todo Completed!✅");
+        }
+    }
+
+    const deleteTodo = (i) => {
+
+        todos.splice(i, 1)
+        localStorage.setItem('todos', JSON.stringify(todos))
+        setTodoArr(todos)
 
 
-==========================================
-
-                <div className='forgotten-pswd'>
-                    <Link className="pswd-link">
-                        <p>forgotten password?</p>
-                    </Link>
-                </div>
-
+    }
+    // const editTodo = (i) =>{
+    //     const findTodo = todos.find((todo) => todo.id === id);
+    //     localStorage.setItem('todos', JSON.stringify(todos))
+    //     setTodoArr(findTodo)
+    // }
 
 
-                .forgotten-pswd {
-    margin-left: 50%;
-    margin-top: 10px;
+
+
+
+        <>
+            <div className='field-button-container'>
+                <div className='text-field'><input type="text" name="todo" placeholder='What would you like to do ?'
+                    value={todo.title} onKeyPress={createTodo} onChange={onChange} /></div>
+                <div className='btn-addTodo'>< button type='button' name='addTodo' onClick={createTodo}>Add</button></div>
+            </div>
+
+            {/* passing props */}
+            <TodoList todoArr={todoArr}
+                completeTodo={completeTodo}
+                deleteTodo={deleteTodo}
+
+
+            />
+        </>
+
+============================================================
+
+
+=============================================================
+
+// const change = (text) => {
+        setStatus(text)
+    }
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { format } from 'date-fns'
+
+    const { completeTodo, deleteTodo } = props
+    let todoArr = props.todoArr.length > 0
+        ? props.todoArr : JSON.parse(localStorage.getItem('todos'))
+
+    const date = new Date();
+    const showTime = date.getHours()
+        + ':' + date.getMinutes()
+        + ":" + date.getSeconds();
+
+
+
+
+
+
+            <div className='todo-caption'>Todo List</div>
+            <div className='columns-titles'>
+                <div id='one-col'>List</div>
+                <div id='two-col'>Status</div>
+                <div id='two-col'>Edit</div>
+                <div id='two-col'>Delete</div>
+            </div>
+            <div className='todo-list'>
+                <ul>
+                    {/* traversing the todo array */}
+                    {todoArr && todoArr.length > 0 ?
+                        todoArr.map((el, i) => (
+
+                            <li key={i} className='todo-list-item'>
+
+                                <div id='list-content' className={el["done"] ? "line-through" : null}>{el.title} <p className='time-date'><i> {format(new Date(), 'do MMMM Y')}  {showTime}</i></p> </div>
+
+                                <div id='list-action' title='Complete' className={`pointer ${el["done"] ? "green" : "blue"}`} onClick={() => completeTodo(i)}>Completed</div>
+                                <EditIcon id='list-action' title="Complete" className='editIcon' />
+                                <DeleteIcon id='list-action' className='deleteIcon' title="Delete" onClick={() => { deleteTodo(i) }} />
+
+                            </li>
+
+                        )) : null
+                    }
+
+                </ul>
+            </div>
+=============================================================
+
+
+
+    const [title, setTitle] = useState("");
+    // const [status, setStatus] = useState("pendings")
+
+    const dispatch = useDispatch()
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //adds todo if title exisit
+        if (title) {
+            dispatch(
+                addTodo({
+                    id: uuid(),
+                    title,
+                    time: new Date().toLocaleString(),
+                })
+            );
+            toast.success('Task Added Successfully')
+
+        } else {
+            toast.error("title shouldn't be empty")
+        }
+
+        setTitle("")
+    }
+
+
+============================================
+
+import React from 'react'
+import { useSelector } from 'react-redux'
+import TodoItem from '../todoitem/TodoItem';
+// import './todoList.css'
+
+
+// import { MaximizeSharp } from '@mui/icons-material';
+function TodoList() {
+
+    const todoList = useSelector((state) => state.todo.todoList);
+
+
+    //sort todo list by time
+    const sortedTodoList = [...todoList];
+    sortedTodoList.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+    return (
+        <div className="todo-list-container">
+            <div>
+                {sortedTodoList && sortedTodoList.length > 0
+                    ? sortedTodoList.map((todo) => )
+                    : ''}
+
+
+            </div>
+        </div>
+
+    )
 }
 
-.pswd-link {
-    text-decoration: none;
-}
-
-.pswd-link:hover {
-    text-decoration: underline;
-}
+export default TodoList
 
 
-.login-container {
 
+
+.taskListContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-left: 34%;
-    margin-top: 5%;
-    /* background-color: aqua; */
-    width: 40%;
-    height: 100vh;
-
-}
-
-.welcome-back-note {
-    margin-bottom: 15px;
-    margin-right: 45px;
-    color: rgb(28, 6, 78);
+    flex-wrap: wrap;
+    margin-top: 10%;
+    background-color: burlywood;
+    width: 75%;
+    height: 190px;
+    margin-left: 11%;
 }
 
 
-.welcome-back-note .paraOne {
-    font-size: 55px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    margin-top: 5%;
+@media screen and (max-width:800px) {
+    .taskListContainer {
+        margin-top: 27%;
+    }
 
 }
 
-.welcome-back-note .paraTwo {
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    padding-top: 12px;
-}
 
-.input-field-one {
-    display: flex;
-    align-items: center;
-    width: 87%;
-    height: 50px;
-    background-color: white;
-    box-shadow: 0px 1px 2px 1px rgb(108, 106, 106);
-    margin-top: 25px;
-    padding-right: 50px;
-    padding-left: 10px;
-    position: relative;
-    border-radius: 15px;
-}
-
-.input-field-one:hover {
-    border: 1px solid orangered;
-    box-shadow: 0px 1px 2px 1px rgb(244, 123, 79);
-    cursor: pointer;
-}
+https://to-do-service-backend-tutorial.onrender.com/new/:id/delete/:id/update/:id
 
 
-.input-field-one input {
-    font-size: 15px;
-    padding-left: 5px;
-    border: none;
-    outline: none;
-    background: none;
-    color: rgb(40, 6, 113);
-}
-
-.input-field-one input::placeholder {
-    font-size: 15px;
-    padding-left: 1px;
-}
-
-.input-field-one .with-out-icon {
-    width: 90%;
-    padding-right: 150px;
-    height: 35px;
-
-}
-
-.with-icon {
-    width: 100%;
-    padding-right: 150px;
-    height: 35px;
-}
-
-.top-icons-env {
-    font-size: 20px;
-    margin-right: 10px;
-    color: orangered;
-}
-
-
-
-.top-icons-lock {
-    font-size: 25px;
-    margin-right: 10px;
-    color: orangered;
-}
-
-.top-left-icons {
-    position: absolute;
-    right: 12px;
-    bottom: 15px;
-    font-size: 19px;
-    color: orangered;
-    /* margin-left: 35px; */
-}
-
-
-
-.sign-up-btn-container {
-    margin-top: 30px;
-}
-
-.sign-up-btn-container button {
-    width: 87%;
-    height: 50px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    background: linear-gradient(120deg, rgb(234, 75, 18), rgb(251, 84, 24), rgb(234, 75, 18));
-    box-shadow: 0px 1px 4px 1px rgb(106, 30, 2);
-    cursor: pointer;
-}
-
-.sign-up-btn-container button:hover {
-    background: linear-gradient(120deg, rgb(251, 75, 11), rgb(245, 67, 3), rgb(240, 69, 7));
-}
-
-.sign-up-btn-container p {
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-}
-
-
-
-.lft-and-rgt-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-right: 55px;
-}
-
-.lft-and-rgt-container .right {
-    margin-right: 10px;
-    width: 40%;
-    border-bottom: 1px solid rgb(201, 199, 199);
-    background-color: rgb(40, 6, 113);
-}
-
-.lft-and-rgt-container .left {
-    margin-left: 10px;
-    width: 40%;
-    border-bottom: 1px solid rgb(201, 199, 199);
-    background-color: rgb(40, 6, 113);
-
-}
-
-.lft-and-rgt-container p {
-    font-weight: 600;
-    color: rgb(40, 6, 113);
-}
-
-.alternative-link {
-    margin-right: 55px;
-    margin-top: 4px;
-}
-
-.alternative-link p {
-    font-family: Arial, Helvetica, sans-serif;
-    color: orangered;
-    font-size: 15px;
-
-}
-
-.text-with-link {
-    text-decoration: none;
-}
-
-
-.social-media-handles-con {
-    display: flex;
-    margin-top: 35px;
-    margin-right: 165px;
-}
-
-#soci-icon {
-    padding-left: 100px;
-    font-size: 25px;
-    color: rgb(28, 6, 78);
-
-}
