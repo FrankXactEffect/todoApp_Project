@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from "axios"
 
 //add props
-function TodoItem({ tasks, item, task, toggleComplete, deleteTodo, editTodo }) {
-    console.log(tasks, "yeap");
+function TodoItem({ task, item, toggleComplete, deleteTodo, editTodo }) {
     const [status, setStatus] = useState("Pending")
 
 
@@ -16,17 +15,19 @@ function TodoItem({ tasks, item, task, toggleComplete, deleteTodo, editTodo }) {
         toggleComplete(task.id);
     };
 
-
+    const date = new Date(task.updatedAt).toUTCString()
+    console.log("Franks single: ", task.updatedAt)
+    // const useTime = JSON.strinify(new Date(item.time)).split("T")[1]
+    // const dateTime = date + " " + useTime
     return (
         <div>
 
             <div className='ItemsList'>
 
                 <div className='todo-time-date'>
-                    <p>{item}</p>
-                    <p id='one' className={`${task.completed ? 'completed' : ''}`}>{item?.content}</p>
+                    <p id='one' className={`${task.completed ? 'completed' : ''}`}>{task?.content}</p>
                     <p id='two'>
-                        {format(new Date(item.createdAt), 'p, MM/dd/yyyy')}
+                        {date}
                     </p>
                 </div>
                 <div role='button' tabIndex={0} className='status-div' onClick={toggleText}>{status}</div>

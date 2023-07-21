@@ -20,6 +20,7 @@ function TodoForm({ addTodo }) {
                 headers: { "Authorization": `Bearer ${token}` }
             },)
             console.log(res);
+            addTodo(content);
         } catch (error) {
             console.log(error)
         }

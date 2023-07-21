@@ -13,16 +13,17 @@ function Tododisplay() {
     const [todos, setTodos] = useState([]);
     const [tasks, setTasks] = useState([]);
 
-    console.log(tasks, "tasks")
-
+    console.log("tasks", tasks)
+    console.log("Todos: ", todos)
     const fetchTodos = async () => {
         const token = window.localStorage.getItem("token")
 
         const res = await axios.get("https://todo-api-bvr7.onrender.com/todo/", {
             headers: { "Authorization": `Bearer ${token}` }
         },)
-        console.log(res);
-        setTasks(res?.data?.todos, "hello");
+
+        console.log("Todos: ", res.data);
+        setTasks(res?.data?.todos);
     }
 
     useEffect(() => {
@@ -30,8 +31,9 @@ function Tododisplay() {
     }, [])
 
     const addTodo = todo => {
+        console.log("Here: ", new Date().toLocaleString())
         setTodos([...todos, { id: uuidv4(), task: todo, time: new Date().toLocaleString(), completed: false, isEditing: false }])
-
+        fetchTodos()
         // if (todos) {
         //     localStorage.getItem("todos", todos)
         //     console.log(todos)
@@ -76,9 +78,10 @@ function Tododisplay() {
                 </div>
 
 
-                {tasks?.map((item) => (
+                {tasks?.map((task) => (
 
-                    <TodoItem task={tasks} item={item?.content} toggleComplete={toggleComplete} deleteTodo={deleteTodo} editTodo={editTodo} />
+                    <TodoItem task={task} toggleComplete={toggleComplete} deleteTodo={deleteTodo} editTodo={editTodo} />
+
 
                 ))}
 
